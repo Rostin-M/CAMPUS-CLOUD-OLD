@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Docente</title>
+  <link rel="stylesheet" href="/css/navbar_profesor.css">
+  <link rel="stylesheet" href="/css/dashboard_profesor.css">
+</head>
+<body>
+  <!-- Navbar Docente -->
+  <nav class="navbar">
+    <div class="logo">CampusCloud</div>
+    <ul class="nav-links">
+      <li><a href="/docente/cursos">Mis Cursos</a></li>
+      <li><a href="/docente/eventos">Crear Evento</a></li>
+      <li><a href="/docente/entregas">Entregas</a></li>
+      <li><a href="/docente/calificar">Calificar</a></li>
+    </ul>
+    <div class="user-section">
+      <a href="/perfil" class="user-profile">
+        <span class="user-icon">👤</span>
+        <span class="user-name" th:text="${nombreUsuario}">Docente</span>
+      </a>
+      <form th:action="@{/logout}" method="post" class="logout-form">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit" class="logout-btn">Cerrar Sesión</button>
+      </form>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="greeting">¡Bienvenido, <span th:text="${nombreUsuario}">Docente</span>!</div>
+    <div class="cards">
+      <div class="card">
+        <h3>Cursos a Cargo</h3>
+        <p>Gestiona tus cursos y contenidos.</p>
+      </div>
+      <div class="card">
+        <h3>Tareas por Calificar</h3>
+        <p>Revisa y califica las entregas de estudiantes.</p>
+      </div>
+      <div class="card">
+        <h3>Próximos Exámenes</h3>
+        <p>Organiza fechas y crea nuevos exámenes.</p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

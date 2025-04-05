@@ -17,18 +17,25 @@ public class DashBoardController {
         this.usuarioRepository = usuarioRepository;
     }
 
+    // Ruta genérica
     @GetMapping("/dashboard")
     public String dashboard(Model model, Principal principal) {
-        String email = principal.getName();
-
-        Usuario usuario = usuarioRepository.findByEmail(email);
-
-        if (usuario != null) {
-            model.addAttribute("nombreUsuario", usuario.getNombre());
-        } else {
-            model.addAttribute("nombreUsuario", "Usuario");
-        }
-
+        Usuario u = usuarioRepository.findByEmail(principal.getName());
+        model.addAttribute("nombreUsuario", u != null ? u.getNombre() : "Usuario");
         return "dashboard";
+    }
+
+    @GetMapping("/dashboard/estudiante")
+    public String dashboardEstudiante(Model model, Principal principal) {
+        Usuario u = usuarioRepository.findByEmail(principal.getName());
+        model.addAttribute("nombreUsuario", u != null ? u.getNombre() : "Estudiante");
+        return "dashboard_estudiante";
+    }
+
+    @GetMapping("/dashboard/docente")
+    public String dashboardDocente(Model model, Principal principal) {
+        Usuario u = usuarioRepository.findByEmail(principal.getName());
+        model.addAttribute("nombreUsuario", u != null ? u.getNombre() : "Docente");
+        return "dashboard_profesor";
     }
 }
