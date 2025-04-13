@@ -51,7 +51,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
           .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/login", "/css/**", "/js/**", "/images/**").permitAll()
+            // Permitir acceso público a Swagger y API
+            .requestMatchers(
+                "/v3/api-docs/**", 
+                "/swagger-ui/**", 
+                "/swagger-ui.html", 
+                "/login", 
+                "/css/**", 
+                "/js/**", 
+                "/images/**"
+            ).permitAll()
             .anyRequest().authenticated()
           )
           .formLogin(form -> form

@@ -47,7 +47,6 @@ mvnw.cmd
 *.out
 
 ### Sensitive files ###
-application.properties
 application.yml
 .env
 
